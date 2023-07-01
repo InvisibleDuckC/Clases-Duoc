@@ -2,8 +2,7 @@
 # si no usaras alguna se recomienda borrarla
 import os
 import numpy as np
-from datetime import datetime
-from datetime import date
+from datetime import timedelta, datetime, date
 from itertools import cycle
 
 def limpiar():
@@ -79,25 +78,21 @@ def separador_miles(valor):
     retorna un str con separadores de miles"""
     #creamos una lista vacia
     desglose = []
-    # Creamos un str de el valor ingresado
-    strvalor = str(valor)
-    # Guardamos el largo de el str
-    lenvalor = len(strvalor)
-    # Invertimos el str
-    mirrorstrvalor = strvalor[-1::-1]
+    # Guardamos una lista con el valor ingresado invertido en formato str
+    mirrorvalor = list(reversed(str(valor)))
 
     # for recore un rango entre 0 y el largo del str
-    for n in range(0,lenvalor):
+    for n in range(0,len(mirrorvalor)):
         # si la division de n en 3 es exacta y n no es 0
         if n % 3 == 0 and n != 0:
             #agregaremos un punto antes de agregar n
             desglose.append(".")
         # añadimos n a lista vacia creada anteriormente
-        desglose.append(mirrorstrvalor[n])
+        desglose.append(mirrorvalor[n])
         
-    mirrorstrvalor2 = ''.join(str(e) for e in desglose)
+    mirrorvalor = ''.join(str(e) for e in desglose)
 
-    return mirrorstrvalor2[-1::-1]
+    return mirrorvalor[::-1]
 
 def registro_():
     """Funcion que retorna un diccionario"""
@@ -227,6 +222,11 @@ def ingresar_entero(concepto="valor"):
         user_input = ingresar_entero(concepto)
 
     return user_input
+
+def arrival_time(hours):
+    now = datetime.now()
+    arrival = now + timedelta(hours=hours)
+    return arrival.strftime("Arrival: %A %H:%M")
 
 if __name__ == '__main__':
     # aqui va el codigo, recuerda borrar el pass ;)
