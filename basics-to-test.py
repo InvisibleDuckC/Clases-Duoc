@@ -7,8 +7,10 @@ from itertools import cycle
 
 def limpiar():
     # limpia la pantalla
-    # ojo si se usa otro tipo de sistema operativo, puede no funcionar
-    os.system('cls')
+    if os.name == "nt":
+        os.system("cls")
+    else:
+        os.system("clear")
 
 def menu_principal():
     """Funcion recursiva que retorna un entero
@@ -130,6 +132,18 @@ def seleccionar_(matriz):
                 #modificar si es que se modifica el nombre de la funcion
         user_input = seleccionar_()
 
+def ingresar_fecha():
+    #Funcion recursiva que valida una fecha en formato Año-Mes-Dia
+    try:
+        fecha = input("Ingresa fecha con formato AAAA-MM-DD: ")
+        datetime.strptime(fecha,r'%Y-%m-%d')
+        print('Fecha valida')
+        return fecha
+    except ValueError:
+        print('Fecha invalida')
+        fecha = ingresar_fecha()
+        return fecha
+
 def ingresar_fecha_nac():
     """funcion que retorna una fecha
     en el formato que entrega la libreria datetime"""
@@ -229,5 +243,19 @@ def arrival_time(hours):
     return arrival.strftime("Arrival: %A %H:%M")
 
 if __name__ == '__main__':
-    # aqui va el codigo, recuerda borrar el pass ;)
-    pass
+    status = True
+
+    while status:
+        option = menu_principal()
+    
+        if option == 1:
+            pass
+        elif option == 2:
+            pass
+        elif option == 3:
+            pass
+        elif option == 4:
+            pass
+        else:
+            status = False
+        
